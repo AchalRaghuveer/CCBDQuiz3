@@ -1,0 +1,178 @@
+{%extends 'base.html'%}
+
+{%block head%}
+<div class="heading" style="text-align: center;align-content: center;">
+    <div class="card"
+        style="text-align: center">
+    <div class="card-body" style="text-align:center;">
+        <h2 class="card-title" style="text-align:center">Quiz 2</h2>
+        <div>
+            <h2>
+                <img src="https://abr2435ccbd.blob.core.windows.net/abr2435container/achal.jpg" />
+                <p class="card-text" style="text-align:center">Name: Achal Bhujangaswami Raghuveer</p>
+                <p class="card-text" style="text-align:center">UTA ID last 4 digits : 2435</p>
+            </h2>
+        </div>
+    </div>
+</div>
+</div>
+
+{%endblock%}
+
+{%block body%}
+
+<h1>Cloud Computing Quiz 2</h1>
+    <h1>----------------------------------------------------------------------------------------------</h1>
+<form action="/search" method="POST">
+    Enter City Name : <input type="text" name="city" placeholder="city name" required>
+    <button type="submit">Search</button>
+</form>
+    {% if cityVal %}
+    <h1>City: {{ cityVal.city }}</h1>
+    <h1>State: {{ cityVal.state }}</h1>
+    <h1>Population: {{ cityVal.population }}</h1>
+    <h1>Lat: {{ cityVal.lat }}</h1>
+    <h1>Lon: {{ cityVal.long }}</h1>
+    {% endif %}
+<h3>====================================================================================================</h3>
+<h1>Cities that are less than 100KM radius</h1>
+<table>
+  <tr>
+    <th>City</th>
+    <th>State</th>
+    <th>Population</th>
+      <th>Lat</th>
+      <th>Lon</th>
+  </tr>
+        {% for tableVal in tableVals %}
+  <tr>
+    <td>{{  tableVal.city }}</td>
+      <td>{{tableVal.state}}</td>
+    <td>{{tableVal.population}}</td>
+  <td>{{tableVal.lat}}</td>
+  <td>{{tableVal.long}}</td>
+  </tr>
+    {% endfor %}
+</table>
+<h1>----------------------------------------------------------------------------------------------</h1>
+    <form action="/range" method="POST">
+        Max Lat :<input type="text" name="number1" placeholder="Search query" >
+        Min Lat :<input type="text" name="number2" placeholder="Search query" >
+        Max Lon :<input type="text" name="number3" placeholder="Search query" >
+        Min Lon :<input type="text" name="number4" placeholder="Search query" >
+        <button type="submit">Check</button>
+    </form>
+
+    <h1>Cities that are in range</h1>
+<table>
+  <tr>
+    <th>City</th>
+    <th>State</th>
+    <th>Population</th>
+      <th>Lat</th>
+      <th>Lon</th>
+  </tr>
+        {% for tableVal in tableVals2 %}
+  <tr>
+    <td>{{  tableVal.city }}</td>
+      <td>{{tableVal.state}}</td>
+    <td>{{tableVal.population}}</td>
+  <td>{{tableVal.lat}}</td>
+  <td>{{tableVal.long}}</td>
+  </tr>
+    {% endfor %}
+</table>
+<h1>----------------------------------------------------------------------------------------------</h1>
+    <h1>Increment the population by bounding box</h1>
+
+    <form action="/incrange" method="POST">
+        Max Lat :<input type="text" name="number1" placeholder="Search query" >
+        Min Lat :<input type="text" name="number2" placeholder="Search query" >
+        Max Lon :<input type="text" name="number3" placeholder="Search query" >
+        Min Lon :<input type="text" name="number4" placeholder="Search query" >
+        Max Population : <input type="text" name="number5" placeholder="Search query" >
+        Min Population : <input type="text" name="number6" placeholder="Search query" >
+        Increment Value : <input type="text" name="inc" placeholder="Search query" >
+        <button type="submit">Check</button>
+    </form>
+        <h1> Changed Population</h1>
+
+        <table>
+  <tr>
+    <th>City</th>
+    <th>State</th>
+    <th>Population</th>
+      <th>Lat</th>
+      <th>Lon</th>
+  </tr>
+        {% for tableVal in tableVals3 %}
+  <tr>
+    <td>{{  tableVal.city }}</td>
+      <td>{{tableVal.state}}</td>
+    <td>{{tableVal.population}}</td>
+  <td>{{tableVal.lat}}</td>
+  <td>{{tableVal.long}}</td>
+  </tr>
+    {% endfor %}
+</table>
+<h1>----------------------------------------------------------------------------------------------</h1>
+    <h1>----------------------------------------------------------------------------------------------</h1>
+    <h1>Increment the population by State Name</h1>
+
+    <form action="/incstate" method="POST">
+                State : <input type="text" name="state" placeholder="Search query" >
+        Max Population : <input type="text" name="number5" placeholder="Search query" >
+        Min Population : <input type="text" name="number6" placeholder="Search query" >
+        Increment Value : <input type="text" name="inc" placeholder="Search query" >
+        <button type="submit">Check</button>
+    </form>
+    <h1> Changed Population</h1>
+        <table>
+  <tr>
+    <th>City</th>
+    <th>State</th>
+    <th>Population</th>
+      <th>Lat</th>
+      <th>Lon</th>
+  </tr>
+        {% for tableVal in tableVals4 %}
+  <tr>
+    <td>{{  tableVal.city }}</td>
+      <td>{{tableVal.state}}</td>
+    <td>{{tableVal.population}}</td>
+  <td>{{tableVal.lat}}</td>
+  <td>{{tableVal.long}}</td>
+  </tr>
+    {% endfor %}
+</table>
+<h1>----------------------------------------------------------------------------------------------</h1>
+    <h1>Delete City by name</h1>
+    <form action="/delete" method="POST" enctype="multipart/form-data">
+
+        City Name: <input type="text" name="nameDel">
+        <input type="submit" value="Delete">
+    </form>
+    {% if msgDel %}
+    <h1>Deleted successfully!!!!</h1>
+    {% endif %}
+    <h1>----------------------------------------------------------------------------------------------</h1>
+    <h1>Delete State by name</h1>
+    <form action="/deleteS" method="POST" enctype="multipart/form-data">
+
+        State Name: <input type="text" name="nameDelS">
+        <input type="submit" value="Delete">
+    </form>
+    {% if msgDelS %}
+    <h1>Deleted successfully!!!!</h1>
+    {% endif %}
+<h1>-------------------------------------------------------------------------------------------------------</h1>
+    <h1>Add Entry</h1>
+    <form action="/add" method="POST">
+                City : <input type="text" name="cityAdd" placeholder="Search query" >
+        State : <input type="text" name="stateAdd" placeholder="Search query" >
+        Population : <input type="text" name="popAdd" placeholder="Search query" >
+        Lat : <input type="text" name="latAdd" placeholder="Search query" >
+        Lon : <input type="text" name="lonAdd" placeholder="Search query" >
+        <button type="submit">Check</button>
+
+{%endblock%}
